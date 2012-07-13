@@ -1,5 +1,9 @@
 require "to_object/version"
 
-module Hash
+class Hash
+
+  def to_object
+    []
+  end
 
 end
