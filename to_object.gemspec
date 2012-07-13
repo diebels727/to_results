@@ -4,8 +4,8 @@ require File.expand_path('../lib/to_object/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["diebels727"]
   gem.email         = ["diebelsalternative@hotmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{converts keys of a hash, and nested hashes, in to objects}
+  gem.summary       = %q{converts keys of a hash, and nested hashes, in to objects}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)
