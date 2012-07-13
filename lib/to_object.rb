@@ -4,17 +4,17 @@ require 'active_support/core_ext'
 class Hash
 
   def to_object
-    hash = inject({}) do |hash,as_array|
+    hash = inject([]) do |hash,as_array|
       key = as_array.shift
       value = as_array.pop
 
       camel_key = key.to_s.camelize
-      key = Struct.new camel_key
+      key = Struct.new(camel_key,value).new
+      key.value = value
 
       value.is_a?(Hash) && (value=value.to_object)
 
-      hash[key] = value
-      hash
+      hash << key
     end
   end
 
