@@ -8,11 +8,12 @@ class Hash
       key = as_array.shift
       value = as_array.pop
 
-      if value.is_a?(Hash)
-        camel_key = key.to_s.camelize
-        key = Struct.new camel_key
-        hash[key] = value
-      end
+      camel_key = key.to_s.camelize
+      key = Struct.new camel_key
+
+      value.is_a?(Hash) && (value=value.to_object)
+
+      hash[key] = value
       hash
     end
   end
