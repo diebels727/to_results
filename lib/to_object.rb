@@ -3,7 +3,24 @@ require "active_support/core_ext"
 
 module Builder
 
+  def errors
+    @errors ||= []
+  end
+
+  def valid?
+    errors.blank?
+  end
+
+  def invalid?
+    !valid?
+  end
+
+  def entries
+    @entries ||= []
+  end
+
   def build( hash )
+    self.entries << hash
     hash.each_pair do |key,value|
 
       if value.is_a? Hash
@@ -13,7 +30,9 @@ module Builder
         value = struct
       end
 
-      singleton_class.instance_eval { attr_accessor key }
+      singleton_class.instance_eval do
+         attr_accessor key
+       end
       send "#{key}=",value
 
       if value.is_a? Array
@@ -26,6 +45,9 @@ module Builder
         end
       end
     end
+
+  rescue
+    self.errors << { :unprocessable => hash }
   end
 
 private

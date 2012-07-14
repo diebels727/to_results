@@ -39,12 +39,20 @@ describe Results do
   end
 
   context 'when the value cannot be parsed' do
-    it 'stores the value directly' do
+    it 'the object is invalid' do
       results = Results.new edgecase_one
       business = results.businesses.first
       categories = business.categories
-      categories.should == [["Pizza","pizza"]]
+      categories.first.should be_invalid
     end
+
+    it 'stores the entries' do
+      results = Results.new edgecase_one
+      business = results.businesses.first
+      categories = business.categories
+      categories.first.entries.should == [["Pizza","pizza"]]
+    end
+
   end
 
 
