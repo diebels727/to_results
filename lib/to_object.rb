@@ -12,14 +12,10 @@ module Builder
         struct.build(value)
         value = struct
       end
-        #binding.pry
-      #else
-      #  binding.pry
-        singleton_class.instance_eval { attr_accessor key }
-      #end
+
+      singleton_class.instance_eval { attr_accessor key }
       send "#{key}=",value
     end
-
   end
 
 end
@@ -31,8 +27,6 @@ class Results
     hash = args.first
     build hash
   end
-
-
 
 end
 

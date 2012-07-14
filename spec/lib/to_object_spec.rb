@@ -16,6 +16,10 @@ describe Results do
   let(:parsed_json) { JSON.parse json }
   let(:value_json) { {:total => 1} }
   let(:hash_json) { {:span => { :left => true,:right => false}} }
+  let(:complicated_hash_json) { {:div => { :span => {:left => 1,:right => 2, :center => {:div => {:left => 100,:right => 20} }}},
+                                 :span =>  {:up => true,:down => {:left => 40,:right => 50} }
+                                }
+                              }
 
   it 'assigns key-value pairs as attributes' do
     results = Results.new value_json
@@ -26,6 +30,8 @@ describe Results do
     results = Results.new hash_json
     results.span.should be_instance_of Struct::Span
   end
+
+
 
 
 
