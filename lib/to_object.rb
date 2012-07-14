@@ -1,28 +1,37 @@
 require "to_object/version"
 require "active_support/core_ext"
 
-class Results
-  attr_reader :json
+module Builder
 
-  def initialize(*args,&block)
-    @json = args.first
-    build
-  end
-
-  def build
-    json.each_pair do |key,value|
-      eigenclass.instance_eval { attr_accessor key }
+  def build( hash )
+    hash.each_pair do |key,value|
+      if value.is_a?(Hash)
+        camel_key = key.to_s.camelize
+        struct = Struct.new(camel_key).new
+        struct.extend Builder
+        struct.build(value)
+        value = struct
+      end
+        #binding.pry
+      #else
+      #  binding.pry
+        singleton_class.instance_eval { attr_accessor key }
+      #end
       send "#{key}=",value
     end
 
   end
 
-private
-  def eigenclass
-    class << self
-      self
-    end
+end
+
+class Results
+  include Builder
+
+  def initialize(*args,&block)
+    hash = args.first
+    build hash
   end
+
 
 
 end
