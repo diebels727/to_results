@@ -9,14 +9,17 @@ describe Hash do
       results = simple_json.to_results
       results.should be_instance_of Results
     end
-
-    it 'assigns base-level key-value pairs as attributes' do
-      results = simple_json.to_results
-      results.total.should be 1
-    end
-
-
-
   end
+end
+
+describe Results do
+  let(:parsed_json) { JSON.parse json }
+  let(:simple_json) { {:total => 1} }
+
+  it 'assigns key-value pairs as attributes' do
+    results = Results.new simple_json
+    results.total.should be 1
+  end
+
 
 end
