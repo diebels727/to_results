@@ -4,9 +4,9 @@ require File.expand_path('../lib/to_object/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["diebels727"]
   gem.email         = ["diebelsalternative@hotmail.com"]
-  gem.description   = %q{converts keys of a hash, and nested hashes, in to objects}
-  gem.summary       = %q{converts keys of a hash, and nested hashes, in to objects}
-  gem.homepage      = ""
+  gem.description   = %q{Turn JSON in to instantiated results.  Get results in JSON.  Parse those results.  Turn those results in to objects.}
+  gem.summary       = %q{Primarily for those programmatic APIs that return JSON.  You work with JSON, you want an easy way to turn parsed-JSON into instantiated ruby object. }
+  gem.homepage      = "http://github.com/diebels727/to_results"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

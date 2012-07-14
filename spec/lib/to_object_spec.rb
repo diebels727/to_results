@@ -1,51 +1,70 @@
 require 'spec_helper'
 
 describe Hash do
-  let(:simple_hash) { {:key => :value} }
+  let(:parsed_json) { JSON.parse json }
+  let(:simple_json) { {:total => 1} }
 
-  it 'creates an array' do
-    objects = simple_hash.to_object
-    objects.class.should be Array
+  context 'to_results' do
+    it 'returns a result' do
+      results = simple_json.to_results
+      results.should be_instance_of Results
+    end
+  end
+end
+
+describe Results do
+  let(:parsed_json) { JSON.parse json }
+  let(:value_json) { {:total => 1} }
+  let(:hash_json) { {:span => { :left => true,:right => false}} }
+  let(:array_json) { { :businesses => [ {:business_one_attribute => 'timewriter'},
+                                               {:business_two_attribute => 'sven vaeth'} ] } }
+  let(:edgecase_one) { {:businesses => [{"categories"=> [["Pizza", "pizza"]]}] } }
+
+  it 'assigns key-value pairs as attributes' do
+    results = Results.new value_json
+    results.total.should be 1
   end
 
-  it 'converts key-value pairs in to objects' do
-    objects = simple_hash.to_object
-    object = objects.first
-    object.should be_instance_of Struct::Key
+  it 'builds objects for values that are hashes' do
+    results = Results.new hash_json
+    results.span.should be_instance_of Struct::Span
   end
 
-  it 'converts a key value pair in to an object, where the key is the class name, and the value is an attribute' do
-    objects = simple_hash.to_object
-    object = objects.first
-    object.value.should be :value
+  it 'always stores json' do
+    results = Results.new hash_json
+    results.json.should be_present
   end
 
-  it 'converts multiple keys in to multiple objects' do
-    objects = { :key_one => :value, :key_two => :value }.to_object
-    objects.map! do |object|
-      klass = object.class
-      superclass = klass.superclass
-      superclass == Struct
+  context 'when the value is an array' do
+    it 'builds arrays of objects' do
+      results = Results.new array_json
+      business = results.businesses.first
+      business.should be_instance_of Struct::Business
+    end
+  end
+
+  context 'when the value cannot be parsed' do
+
+    it 'the object is invalid' do
+      results = Results.new edgecase_one
+      business = results.businesses.first
+      categories = business.categories
+      categories.first.should be_invalid
     end
 
-    objects.include?(false).should_not be true
+    it 'stores json' do
+      results = Results.new edgecase_one
+      business = results.businesses.first
+      categories = business.categories
+      categories.first.json.should == [["Pizza","pizza"]]
+    end
+
   end
 
-  context 'when the hash value is a hash' do
 
-    it 'converts the key in to a struct' do
-      objects = { :key => {} }.to_object
-      object = objects.first
-      object.should be_instance_of Struct::Key
-    end
-
-    it 'converts values that have hashes in to structs' do
-      hash = { :key => { :key => :value } }.to_object
-      value = hash.values.first
-      key   = value.keys.first
-      key.should be Struct::Key
-    end
-
+  it 'converts parsed json in to objects' do
+    results = Results.new parsed_json
+    results.should be_valid
   end
 
 
