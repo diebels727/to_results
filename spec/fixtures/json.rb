@@ -1,37 +1,3 @@
 def json
-  @json ||= {
-              "region"=>
-              {
-                "span"=>
-                {
-                  "latitude_delta"=>0.12593679999999097,
-                  "longitude_delta"=>0.2128833299999826
-                },
-                "center"=>
-                {
-                  "latitude"=>38.885987,
-                  "longitude"=>-77.16956915
-                }
-              },
-              "total"=>39,
-              "businesses"=>
-              [{
-                "is_claimed"=>false,
-                "rating"=>3.5,
-                "mobile_url"=>"http://business",
-                 "review_count"=>70,
-                     "name"=>"Business",
-                     "location"=>
-                      {
-                       "city"=>"City",
-                       "display_address"=>["6775 Wilson Blvd", "Falls Church, VA 22044"],
-                       "address"=>["6775 Wilson Blvd"],
-                       "coordinate"=>
-                        {
-                          "latitude"=>38.872902,
-                          "longitude"=>-77.1532816
-                        },
-                       }
-              }]
-            }
+  @json ||= "{\"region\":{\"span\":{\"latitude_delta\":0.0,\"longitude_delta\":0.0},\"center\":{\"latitude\":40.616258999999999,\"longitude\":-74.030310999999998}},\"total\":3018,\"businesses\":[{\"is_claimed\":false,\"rating\":5.0,\"mobile_url\":\"http://m.yelp.com/biz/espresso-pizzeria-brooklyn\",\"rating_img_url\":\"http://media3.ak.yelpcdn.com/static/201206262578611207/img/ico/stars/stars_5.png\",\"review_count\":24,\"name\":\"Espresso Pizzeria\",\"snippet_image_url\":\"http://media3.ak.yelpcdn.com/static/201206261986305257/img/gfx/blank_user_medium.gif\",\"rating_img_url_small\":\"http://media3.ak.yelpcdn.com/static/201206261949604803/img/ico/stars/stars_small_5.png\",\"url\":\"http://www.yelp.com/biz/espresso-pizzeria-brooklyn\",\"phone\":\"7188338750\",\"snippet_text\":\"BEST PIZZA IN BROOKLYN!!!\\n\\nDon't let the looks of this place fool you!\\nTheir prices are reasonable and their pizza is flavorful and crisp.\",\"image_url\":\"http://s3-media4.ak.yelpcdn.com/bphoto/dlF702Bamqvn5g7HO_B7zw/ms.jpg\",\"categories\":[[\"Pizza\",\"pizza\"]],\"display_phone\":\"+1-718-833-8750\",\"rating_img_url_large\":\"http://media1.ak.yelpcdn.com/static/20120626354709277/img/ico/stars/stars_large_5.png\",\"id\":\"espresso-pizzeria-brooklyn\",\"is_closed\":false,\"location\":{\"cross_streets\":\"4th Ave & 95th St\",\"city\":\"Brooklyn\",\"display_address\":[\"9403 5th Ave\",\"(b/t 4th Ave & 95th St)\",\"Bay Ridge\",\"Brooklyn, NY 11209\"],\"geo_accuracy\":8,\"neighborhoods\":[\"Bay Ridge\",\"Fort Hamilton\"],\"postal_code\":\"11209\",\"country_code\":\"US\",\"address\":[\"9403 5th Ave\"],\"coordinate\":{\"latitude\":40.616258999999999,\"longitude\":-74.030310999999998},\"state_code\":\"NY\"}}]}"
 end

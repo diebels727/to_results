@@ -18,6 +18,7 @@ describe Results do
   let(:hash_json) { {:span => { :left => true,:right => false}} }
   let(:array_json) { { :businesses => [ {:business_one_attribute => 'timewriter'},
                                                {:business_two_attribute => 'sven vaeth'} ] } }
+  let(:edgecase_one) { {:businesses => [{"categories"=> [["Pizza", "pizza"]]}] } }
 
   it 'assigns key-value pairs as attributes' do
     results = Results.new value_json
@@ -35,7 +36,22 @@ describe Results do
       business = results.businesses.first
       business.should be_instance_of Struct::Business
     end
+  end
 
+  context 'when the value cannot be parsed' do
+    it 'stores the value directly' do
+      results = Results.new edgecase_one
+      business = results.businesses.first
+      categories = business.categories
+      categories.should == [["Pizza","pizza"]]
+    end
+  end
+
+
+  it 'converts parsed json in to objects' do
+    binding.pry
+    results = Results.new parsed_json
+    binding.pry
   end
 
 

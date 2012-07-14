@@ -25,7 +25,6 @@ module Builder
           send(key) << struct
         end
       end
-
     end
   end
 
