@@ -8,8 +8,7 @@ module Builder
 
       if value.is_a? Hash
         camel_key = key.to_s.camelize
-        struct = Struct.new(camel_key).new
-        struct.extend Builder
+        struct = make_struct_instance camel_key
         struct.build(value)
         value = struct
       end
@@ -21,14 +20,21 @@ module Builder
         send "#{key}=",[]
         singular_key = key.to_s.singularize
         value.each do |value|
-          struct = Struct.new(singular_key.camelize).new
-          struct.extend Builder
+          struct = make_struct_instance singular_key.camelize
           struct.build(value)
           send(key) << struct
         end
       end
 
     end
+  end
+
+private
+
+  def make_struct_instance( camelized_key )
+    klass = Struct.const_defined?(camelized_key) ? Struct.const_get(camelized_key) : Struct.new(camelized_key)
+    struct = klass.new
+    struct.extend Builder
   end
 
 end
