@@ -15,12 +15,12 @@ module Builder
     !valid?
   end
 
-  def entries
-    @entries ||= []
+  def json
+    @json ||= []
   end
 
   def build( hash )
-    self.entries << hash
+    self.json << hash
     hash.each_pair do |key,value|
 
       if value.is_a? Hash

@@ -30,9 +30,9 @@ describe Results do
     results.span.should be_instance_of Struct::Span
   end
 
-  it 'always stores entries' do
+  it 'always stores json' do
     results = Results.new hash_json
-    results.entries.should be_present
+    results.json.should be_present
   end
 
   context 'when the value is an array' do
@@ -44,6 +44,7 @@ describe Results do
   end
 
   context 'when the value cannot be parsed' do
+
     it 'the object is invalid' do
       results = Results.new edgecase_one
       business = results.businesses.first
@@ -51,11 +52,11 @@ describe Results do
       categories.first.should be_invalid
     end
 
-    it 'stores the entries' do
+    it 'stores json' do
       results = Results.new edgecase_one
       business = results.businesses.first
       categories = business.categories
-      categories.first.entries.should == [["Pizza","pizza"]]
+      categories.first.json.should == [["Pizza","pizza"]]
     end
 
   end
@@ -63,6 +64,7 @@ describe Results do
 
   it 'converts parsed json in to objects' do
     results = Results.new parsed_json
+    binding.pry
     results.should be_valid
   end
 
