@@ -46,8 +46,8 @@ module Builder
       end
     end
 
-  rescue
-    self.errors << { :unprocessable => hash }
+  rescue Exception => e
+    self.errors << { e.message => hash }
   end
 
 private

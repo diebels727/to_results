@@ -57,9 +57,8 @@ describe Results do
 
 
   it 'converts parsed json in to objects' do
-    binding.pry
     results = Results.new parsed_json
-    binding.pry
+    results.should be_valid
   end
 
 
