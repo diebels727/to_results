@@ -6,7 +6,7 @@ You work with JSON all the time.  JSON is easy to work with.  That's what makes 
 
 Add this line to your application's Gemfile:
 
-    gem 'to_object'
+    gem 'to_results'
 
 And then execute:
 
@@ -14,7 +14,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install to_object
+    $ gem install to_results
 
 ## Usage
 
@@ -43,7 +43,16 @@ Parse JSON.
 Get results.
 
 ```ruby
-  results = json.results
+  results = json.to_results
+```
+
+Look at the objects.
+
+```ruby
+  menu = results.menu
+  => #<struct Struct::Menu>
+  menu.id
+  => "file"
 ```
 
 ## Contributing
