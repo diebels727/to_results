@@ -30,6 +30,11 @@ describe Results do
     results.span.should be_instance_of Struct::Span
   end
 
+  it 'always stores entries' do
+    results = Results.new hash_json
+    results.entries.should be_present
+  end
+
   context 'when the value is an array' do
     it 'builds arrays of objects' do
       results = Results.new array_json
